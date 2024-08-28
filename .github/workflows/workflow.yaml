@@ -26,6 +26,7 @@ jobs:
           tenant_id: 167
           token: ${{ secrets.TOKEN }}
           soft_fail: true
+          output_file_path: ./results
 
       - name: Show file
         run: | 
