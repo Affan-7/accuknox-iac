@@ -21,4 +21,9 @@ jobs:
         with:
           tenant_id: 167
           token: ${{ secrets.TOKEN }}
-          soft_fail: false
+          soft_fail:
+
+      - name: Show file
+        run: | 
+          cat result.json
+          ls -la
