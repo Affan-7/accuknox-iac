@@ -2,8 +2,8 @@ name: IaC Scan
 
 on:
   push:
-  branches:
-    - main
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
