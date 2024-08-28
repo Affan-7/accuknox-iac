@@ -1,0 +1,18 @@
+on:
+  push:
+  branches:
+    - main
+  workflow_dispatch:
+
+jobs:
+  IaC_scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Accuknox IaC
+        uses: accuknox/iac-scan-action@v0.0.1
+        with:
+          tenant_id: 167
+          token: ${{ secrets.TOKEN }}
