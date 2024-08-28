@@ -18,3 +18,4 @@ jobs:
         with:
           tenant_id: 167
           token: ${{ secrets.TOKEN }}
+          soft_fail:
