@@ -76,8 +76,6 @@ resource "aws_ebs_volume" "my_ebs" {
   availability_zone = "us-west-2a"
   size              = 10
   volume_type       = "gp2"
-  encrypted         = false              # Enables encryption
-
   tags = {
     Name = "myEBSVolume"
   }
