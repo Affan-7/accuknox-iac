@@ -60,3 +60,25 @@ resource "aws_security_group" "example" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+resource "aws_s3_bucket" "secret_data_bucket" {
+  bucket = "secret-data-bucket"
+  acl    = "private"
+  
+  tags = {
+    Name        = "SecretDataBucket"
+    Environment = "Dev"
+  }
+}
+
+
+resource "aws_ebs_volume" "my_ebs" {
+  availability_zone = "us-west-2a"
+  size              = 10
+  volume_type       = "gp2"
+  encrypted         = false              # Enables encryption
+
+  tags = {
+    Name = "myEBSVolume"
+  }
+}
