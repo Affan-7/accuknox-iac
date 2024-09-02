@@ -3,21 +3,30 @@ provider "aws" {
     profile = "affan-accuknox-personal"
 }
 
-resource "aws_security_group" "public_sg" {
-  name        = "public_sg"
-  description = "Security group with all ports open to the public"
+resource "aws_s3_bucket" "sensitive-data2-bucket" {
+  bucket = "sensitive-data2"
+}
 
-  ingress {
-    from_port   = 0
-    to_port     = 65535
-    protocol    = "-1"  # -1 means all protocols
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+resource "aws_s3_bucket_public_access_block" "sensitive-data2-bucket-public-access" {
+  bucket = aws_s3_bucket.sensitive-data2-bucket.id
 
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"  # -1 means all protocols
-    cidr_blocks = ["0.0.0.0/0"]
+  block_public_acls   = false
+  block_public_policy = false
+}
+
+resource "aws_s3_bucket_ownership_controls" "sensitive-data2-bucket-owner-preferred" {
+  bucket = aws_s3_bucket.sensitive-data2-bucket.id
+  rule {
+    object_ownership = "BucketOwnerPreferred"
   }
+}
+
+resource "aws_s3_bucket_acl" "example" {
+  depends_on = [
+    aws_s3_bucket_public_access_block.sensitive-data2-bucket-public-access,
+    aws_s3_bucket_ownership_controls.sensitive-data2-bucket-owner-preferred,
+  ]
+
+  bucket = aws_s3_bucket.sensitive-data2-bucket.id
+  acl    = "authenticated-read"
 }
