@@ -6,11 +6,9 @@
 trigger:
 - main
 
-jobs:
-- job: Job1
-  pool:
-    vmImage: ubuntu-latest
-  
-  steps:
-  
-  - script: echo "This is Job 1"
+pool:
+  name: "self hosted"
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
