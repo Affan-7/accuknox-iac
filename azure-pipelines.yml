@@ -19,6 +19,7 @@ steps:
     checkov -d . --output json > checkov_report.json || true
     jq --arg repoLink "$(Build.Repository.Name)" --arg branch "$(Build.SourceBranchName)" \
       '. += [{"details": {"repo": $repoLink, "branch": $branch}}]' checkov_report.json > result.json
+    cat result.json
     curl --location --request POST "https://cspm.demo.accuknox.com/api/v1/artifact/?tenant_id=$(TENANT_ID)&data_type=IAC&save_to_s3=true&(LABEL)" \
       --header "Tenant-Id: $(TENANT_ID)" \
       --header "Authorization: Bearer $(AK_TOKEN)" \
