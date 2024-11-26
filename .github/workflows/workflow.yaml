@@ -27,6 +27,7 @@ jobs:
           token: ${{ secrets.TOKEN }}
           soft_fail: true
           output_file_path: ./results
+          label: iactest
 
       - name: Show file
         run: | 
